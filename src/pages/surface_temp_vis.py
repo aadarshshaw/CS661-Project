@@ -149,6 +149,7 @@ def create_select(id):
         data=countries,
         searchable=True,
         nothingFound="No options found",
+        value=["United States", "India", "China"],
     )
 
 
