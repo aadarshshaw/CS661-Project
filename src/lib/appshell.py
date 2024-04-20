@@ -141,6 +141,11 @@ def create_side_nav_content(nav_data):
                 "Surface Temparature Vis",
                 "/surface_temp_vis",
             ),
+            create_main_nav_link(
+                "material-symbols:eco",
+                "GDP Visualisation",
+                "/gdp_vis",
+            ),
         ],
     )
 
