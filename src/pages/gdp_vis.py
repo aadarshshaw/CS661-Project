@@ -14,10 +14,15 @@ register_page(
 )
 
 emm_gdp = pd.read_excel(
-    "Datasets\GDP\Correlation - Emissions vs GDP.xlsx", sheet_name="Correlation-Country"
+    Path(__file__).parents[2]
+    / "Datasets"
+    / "GDP"
+    / "Correlation - Emissions vs GDP.xlsx",
+    sheet_name="Correlation-Country",
 )
 temp_gdp = pd.read_excel(
-    "Datasets\GDP\Correlation - GDP vs Temp.xlsx", sheet_name="Correlation-Method 2"
+    Path(__file__).parents[2] / "Datasets" / "GDP" / "Correlation - GDP vs Temp.xlsx",
+    sheet_name="Correlation-Method 2",
 )
 countries = emm_gdp["Country"]
 
@@ -98,7 +103,7 @@ layout = html.Div(
                 dmc.Col(
                     Tile(
                         "Highest Correlation",
-                        f"{highest_gdp_country['Rho']:.2f}",
+                        f"{highest_gdp_country['Rho']:.4f}",
                         highest_gdp_country["Country"],
                     ),
                     span=4,
@@ -106,13 +111,15 @@ layout = html.Div(
                 dmc.Col(
                     Tile(
                         "Lowest Correlation",
-                        f"{lowest_gdp_country['Rho']:.2f}",
+                        f"{lowest_gdp_country['Rho']:.4f}",
                         lowest_gdp_country["Country"],
                     ),
                     span=4,
                 ),
                 dmc.Col(
-                    Tile("Average Correlation", f"{emm_gdp['Rho'].mean():.2f}", ""),
+                    Tile(
+                        "Average Correlation", f"{emm_gdp['Rho'].mean():.4f}", "World"
+                    ),
                     span=4,
                 ),
                 dmc.Col(
