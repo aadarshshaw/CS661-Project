@@ -34,7 +34,7 @@ highest_gdp_country, lowest_gdp_country = (
 
 
 def create_emm_gdp_graph():
-    fig = go.FigureWidget(
+    fig = go.Figure(
         data=go.Choropleth(
             locations=countries,
             z=emm_gdp["Rho"],
@@ -54,7 +54,7 @@ def create_emm_gdp_graph():
 
 
 def create_gdp_temp_graph():
-    fig = go.FigureWidget(
+    fig = go.Figure(
         data=go.Choropleth(
             locations=countries,
             z=temp_gdp["Rho"],
