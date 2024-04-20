@@ -146,6 +146,11 @@ def create_side_nav_content(nav_data):
                 "GDP Visualisation",
                 "/gdp_vis",
             ),
+            create_main_nav_link(
+                "material-symbols:cloud",
+                "CO2 Emissions Visualisation",
+                "/co2_vis",
+            ),
         ],
     )
 
