@@ -25,13 +25,13 @@ def Tile(image, name, branch, email):
         withBorder=True,
         m=5,
         children=[
-            dmc.Image(
-                src=image,
-                alt="",
-                width=100,
-                height=100,
-                radius="lg",
-            ),
+            # dmc.Image(
+            #     src=image,
+            #     alt="",
+            #     width=100,
+            #     height=100,
+            #     radius="lg",
+            # ),
             dmc.Text(name, size="lg", mt="md"),
             dmc.Divider(
                 style={"width": 50},

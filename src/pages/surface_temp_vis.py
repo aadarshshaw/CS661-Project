@@ -14,13 +14,13 @@ register_page(
 )
 
 min_temp, max_temp = -37.658, 38.84200000000001
-min_year, max_year = "1743", "2013"
+min_year, max_year = 1750, 2023
 
 parsed_path = (
     Path(__file__).parents[2]
     / "Datasets"
     / "Surface Temperatures"
-    / "ParsedSurfaceTemp.csv"
+    / "AnnualTempByCountry.xlsx"
 )
 global_temp_path = (
     Path(__file__).parents[2]
@@ -29,9 +29,23 @@ global_temp_path = (
     / "GlobalLandTemperaturesByCountry.csv"
 )
 
-df = pd.read_csv(parsed_path)
+global_temp_anomaly_path = (
+    Path(__file__).parents[2] / "Datasets" / "Surface Temperatures" / "TempAnomaly.csv"
+)
+
+global_mean_temp_path = (
+    Path(__file__).parents[2]
+    / "Datasets"
+    / "Surface Temperatures"
+    / "GlobalMeanTemp.csv"
+)
+
+df = pd.read_excel(parsed_path, sheet_name="Complete")
 global_temp_country = pd.read_csv(global_temp_path)
+global_mean_temp = pd.read_csv(global_mean_temp_path)
+global_mean_temp.index = global_mean_temp["Year"]
 global_temp_country["dt"] = pd.to_datetime(global_temp_country["dt"])
+global_temp_anomaly = pd.read_csv(global_temp_anomaly_path)
 
 countries = df["Country"].tolist()
 selected_countries = []
@@ -42,7 +56,7 @@ def getMeanTemperature(year):
 
 
 initial_year = min_year
-initial_year_data = getMeanTemperature("2013")
+initial_year_data = getMeanTemperature(2023)
 
 
 def create_slider(min_year, max_year):
@@ -142,6 +156,50 @@ def create_button(id, text, color):
     return dmc.Button(id=id, color=color, children=[dmc.Text(text)])
 
 
+def create_global_temp_plot(year):
+    if year > 2020:
+        year = 2020
+    fig = go.Figure()
+    temps = []
+    for y in range(min_year, year + 1):
+        temps.append(global_mean_temp.loc[y]["MeanTemp"])
+    fig.add_trace(go.Scatter(x=list(range(min_year, year + 1)), y=temps))
+    fig.update_layout(
+        title="Global Average Land Temperature",
+        xaxis=dict(title="Year"),
+        yaxis=dict(title="Temperature (°C)"),
+        plot_bgcolor="rgba(0, 0, 0, 0)",
+        paper_bgcolor="rgba(0, 0, 0, 0)",
+    )
+    return fig
+
+
+def create_global_temp_anomaly_plot(year):
+    fig = go.Figure()
+    fig.add_trace(
+        go.Bar(
+            x=global_temp_anomaly[global_temp_anomaly["Year"] <= year]["Year"],
+            y=global_temp_anomaly[global_temp_anomaly["Year"] <= year]["Anomaly"],
+            marker=dict(
+                color=np.where(
+                    global_temp_anomaly[global_temp_anomaly["Year"] <= year]["Anomaly"]
+                    > 0,
+                    "crimson",
+                    "blue",
+                )
+            ),
+        )
+    )
+    fig.update_layout(
+        title="Global Average Land Temperature Anomaly",
+        xaxis=dict(title="Year"),
+        yaxis=dict(title="Temperature Anomaly (°C)"),
+        plot_bgcolor="rgba(0, 0, 0, 0)",
+        paper_bgcolor="rgba(0, 0, 0, 0)",
+    )
+    return fig
+
+
 def create_country_temp_plot(year, selected_countries):
     if selected_countries is None:
         return go.Figure(
@@ -198,7 +256,7 @@ layout = html.Div(
         dmc.Text(
             "Surface Temperature Visualization", align="center", style={"fontSize": 30}
         ),
-        create_slider(1743, 2013),
+        create_slider(min_year, max_year),
         dmc.Grid(
             children=[
                 dmc.Grid(
@@ -206,7 +264,7 @@ layout = html.Div(
                     children=[
                         dmc.Col(
                             dcc.Graph(
-                                figure=create_surface_plot("2013"),
+                                figure=create_surface_plot(2023),
                                 id="surface-temperature-plot",
                             ),
                             span=12,
@@ -214,39 +272,55 @@ layout = html.Div(
                         dmc.Col(
                             Tile(
                                 "Data Available for",
-                                str(np.sum(~df["2013"].isna())),
+                                str(np.sum(~df[2023].isna())),
                                 "Countries",
                             ),
-                            span=3,
+                            span=4,
                             id="data-available",
                         ),
                         dmc.Col(
                             Tile(
                                 "Max Temp",
                                 str(round(max_temp, 2)) + "°C",
-                                df["Country"][np.argmax(df["2013"])],
+                                df["Country"][np.argmax(df[2023])],
                             ),
-                            span=3,
+                            span=4,
                             id="max-temp",
                         ),
                         dmc.Col(
                             Tile(
                                 "Min Temp",
                                 str(round(min_temp, 2)) + "°C",
-                                df["Country"][np.argmin(df["2013"])],
+                                df["Country"][np.argmin(df[2023])],
                             ),
-                            span=3,
+                            span=4,
                             id="min-temp",
                         ),
+                        # dmc.Col(
+                        #     Tile(
+                        #         "Global Avg Temp",
+                        #         str(round(np.nanmean(getMeanTemperature(2023)), 2))
+                        #         + "°C",
+                        #         "World",
+                        #     ),
+                        #     span=3,
+                        #     id="global-temp",
+                        # ),
+                    ],
+                ),
+                dmc.Grid(
+                    children=[
                         dmc.Col(
-                            Tile(
-                                "Global Avg Temp",
-                                str(round(np.nanmean(getMeanTemperature("2013")), 2))
-                                + "°C",
-                                "World",
+                            dcc.Graph(
+                                figure=create_global_temp_plot(2020),
+                                id="global-temp-plot",
                             ),
-                            span=3,
-                            id="global-temp",
+                        ),
+                        dmc.Col(
+                            dcc.Graph(
+                                figure=create_global_temp_anomaly_plot(2023),
+                                id="global-temp-anomaly-plot",
+                            ),
                         ),
                     ],
                 ),
@@ -258,7 +332,7 @@ layout = html.Div(
                         ),
                         dmc.Col(
                             dcc.Graph(
-                                figure=create_country_temp_plot("2013", []),
+                                figure=create_country_temp_plot(2023, []),
                                 id="country-temp-plot",
                             ),
                             span=12,
@@ -277,7 +351,7 @@ layout = html.Div(
         Output("surface-temperature-plot", "figure"),
         Output("max-temp", "children"),
         Output("min-temp", "children"),
-        Output("global-temp", "children"),
+        # Output("global-temp", "children"),
         Output("data-available", "children"),
     ],
     Input("year-slider", "value"),
@@ -285,25 +359,25 @@ layout = html.Div(
 )
 def update_surface_plot(value):
     return (
-        create_surface_plot(str(value)),
+        create_surface_plot(value),
         Tile(
             "Max Temp",
-            str(round(np.nanmax(getMeanTemperature(str(value))), 2)) + "°C",
-            df["Country"][np.argmax(df[str(value)])],
+            str(round(np.nanmax(getMeanTemperature(value)), 2)) + "°C",
+            df["Country"][np.argmax(df[value])],
         ),
         Tile(
             "Min Temp",
-            str(round(np.nanmin(getMeanTemperature(str(value))), 2)) + "°C",
-            df["Country"][np.argmin(df[str(value)])],
+            str(round(np.nanmin(getMeanTemperature(value)), 2)) + "°C",
+            df["Country"][np.argmin(df[value])],
         ),
-        Tile(
-            "Global Avg Temp",
-            str(round(np.nanmean(getMeanTemperature(str(value))), 2)) + "°C",
-            "World",
-        ),
+        # Tile(
+        #     "Global Avg Temp",
+        #     str(round(np.nanmean(getMeanTemperature(value)), 2)) + "°C",
+        #     "World",
+        # ),
         Tile(
             "Data Available for",
-            str(np.sum(~df[str(value)].isna())),
+            str(np.sum(~df[value].isna())),
             "Countries",
         ),
     )
@@ -319,3 +393,15 @@ def update_surface_plot(value):
 )
 def update_country_temp_plot(year, countries):
     return create_country_temp_plot(year, countries)
+
+
+@callback(
+    [
+        Output("global-temp-plot", "figure"),
+        Output("global-temp-anomaly-plot", "figure"),
+    ],
+    Input("year-slider", "value"),
+    prevent_initial_call=True,
+)
+def update_global_temp_plot(year):
+    return create_global_temp_plot(year), create_global_temp_anomaly_plot(year)
