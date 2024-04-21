@@ -257,7 +257,20 @@ layout = html.Div(
         dmc.Text(
             "Surface Temperature Visualization", align="center", style={"fontSize": 30}
         ),
-        create_slider(min_year, max_year),
+        dmc.Container(
+            create_slider(min_year, max_year),
+            size="lg",
+            pt=20,
+            style={
+                "position": "fixed",
+                "z-index": "100",
+                "bottom": "0",
+                "width": "100%",
+                "padding-left": "0px",
+                "background-color": "white",
+                "margin-left": "-10px",
+            },
+        ),
         dmc.Grid(
             children=[
                 dmc.Grid(
@@ -340,6 +353,9 @@ layout = html.Div(
                         ),
                     ],
                     grow=True,
+                ),
+                dmc.Container(
+                    dmc.Space(h="80px"),
                 ),
             ]
         ),
