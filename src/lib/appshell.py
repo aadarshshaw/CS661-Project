@@ -151,6 +151,11 @@ def create_side_nav_content(nav_data):
                 "CO2 Emissions Visualisation",
                 "/co2_vis",
             ),
+            create_main_nav_link(
+                "material-symbols:globe",
+                "Annual CO2 emission ",
+                "/annual_co2_emission",
+            ), 
         ],
     )
 
