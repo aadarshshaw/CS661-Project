@@ -294,42 +294,8 @@ def update_graph(selected_regions):
     
     return fig
 
-# #######
+
 layout.children.append(html.P(children='From the above graph, we can observe although Europe and United States are the regions having most of the CO2 emission in total, Asia\'s CO2 emission has skyrocketed in the last 2 decades.'))
-# # Group the data frame by Entity and sum the CO2 emission
-# total_r = df_dash_region.groupby(['Entity'])["Annual CO₂ emissions by region"].sum()
 
-# # Create a data frame from the resulting series
-# df_total_r = pd.DataFrame(total_r)
 
-# # Sort the dataframe
-# df_total_r = df_total_r.sort_values('Annual CO₂ emissions by region', ascending = False)
 
-# # Reset the index to convert Entity into a column
-# df_total_r.reset_index(level=0, inplace=True)
-
-# # Plot the bar chart
-# fig = px.bar(df_total_r,
-#               x = 'Entity',
-#               y = 'Annual CO₂ emissions by region',
-#               color='Annual CO₂ emissions by region',
-#               hover_name = 'Entity',
-#               hover_data = ['Annual CO₂ emissions by region'],
-#               color_continuous_scale = 'Peach',
-#               labels={'Entity':'Country','Annual CO₂ emissions by region':'Total CO₂ Emission'},
-#               height=500)
-
-# # Adjust text label size & angle and the title
-# fig.update_layout(uniformtext_minsize = 15,
-#                   xaxis_tickangle = -45,
-#                   title = 'Total CO₂ Emission Between Years 1750 and 2022 - Countries',
-#                   title_x = 0.5)
-
-# # Make background transparent
-# fig.update_layout({'plot_bgcolor': 'rgba(0, 0, 0, 0)',
-#                    'paper_bgcolor': 'rgba(0, 0, 0, 0)'})
-
-# # Show color scale axis
-# fig.update(layout_coloraxis_showscale = True)
-# # Add the graph to the layout
-# layout.children.append(dcc.Graph(id='bar-graph', figure=fig, style={'height': '600px', 'width': '1000px'}))

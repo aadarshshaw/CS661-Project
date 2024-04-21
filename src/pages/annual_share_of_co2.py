@@ -21,15 +21,14 @@ df_top_countries = df[df["Entity"].isin(top_countries[:])]
 register_page(
     __name__,
     "/annual_share_of_co2",
-    title="Annual share of co2",
+    title="Share of global CO2 emissions by country",
     description="Annual share of co2",
 )
 
 layout = html.Div(
-    [
-        dmc.Text(
-            " Percentage CO2 Emission Share", align="center", weight=700, size="xl"
-        ),
+    [   html.H1('Share of global CO2 emissions by country'),
+        html.P('In the interactive chart, you can explore each country’s share of global emissions. Using the timeline at the bottom of the map, you can see how the global distribution has changed since 1750. By clicking on any country you can see its evolution and compare it with others.'),
+        
         dmc.Space(h="xl"),
         dmc.Grid(
             [
@@ -204,3 +203,7 @@ def update_plot(plot_type, selected_countries, selected_year):
         )
 
     return fig
+
+layout.children.append(html.Div([
+    html.P('Over time, where emissions come from has changed a lot. At first, the UK was the big emitter until 1888, when the US took over. This happened because the UK started using machines in factories. Even though emitting CO2 is bad for the environment, it also meant people were living better lives. But now, we need to cut down on CO2 to make sure the future is good too. After the UK, countries like the US, North America, and Oceania started emitting more. Nowadays, many big emitters are in Asia because they\'re getting better off. But to fix things, all countries, especially big ones like China, the USA, and the EU, need to work together.')
+]))
