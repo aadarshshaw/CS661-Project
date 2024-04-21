@@ -166,6 +166,11 @@ def create_side_nav_content(nav_data):
                 "CO2 Emissions growth",
                 "/co2_growth_annually",
             ),
+            create_main_nav_link(
+                "material-symbols:cloud",
+                "Population and CO2",
+                "/population_and_co2",
+            ),
         ],
     )
 
