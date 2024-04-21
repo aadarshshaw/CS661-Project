@@ -6,7 +6,7 @@ from dash import dcc, html, register_page, Input, Output, callback
 import dash_mantine_components as dmc
 
 # Load data
-df = pd.read_csv('Datasets\Annual_perc_change_in_co2\change-co2-annual-pct.csv')
+df = pd.read_csv('Datasets/Annual_perc_change in co2/change-co2-annual-pct.csv')
 
 # Calculate total emissions for each country
 total_emissions = df.groupby('Entity')['Annual CO₂ emissions growth (%)'].sum()
@@ -26,11 +26,12 @@ register_page(
 )
 
 layout = html.Div([
-    dmc.Text("Annual CO₂ emissions growth (%)", align="center", style={"fontSize": 28}), 
+    html.H1("Annual percentage change in CO₂ emissions"), 
+    html.P('This interactive chart shows the year-on-year growth rate of CO2 emissions. A positive figure in a given year indicates that emissions were higher than the previous year. A negative figure indicates they were lower than the year before. For example, a change of 1.5% indicates that global emissions were 1.5% higher than the previous year (–1.5% would mean they were 1.5% lower).This measure allows us to see firstly where emissions are rising, and where they are falling; and secondly, the rate at which emissions are changing – whether the growth in emissions is slowing down or accelerating.'),
     html.Div([
         html.Div([
             html.Label("Select Plot Type:", style={'fontWeight': 'bold'}),
-            dmc.Dropdown(
+            dcc.Dropdown(
                 id='plot-type-dropdown',
                 options=[
                     {'label': 'Map', 'value': 'choropleth'},
@@ -42,8 +43,8 @@ layout = html.Div([
         ], style={'marginBottom': '20px'}),
         html.Div([
             html.Label("Select Countries:", style={'fontWeight': 'bold'}),
-            dmc.Dropdown(
-                id='country-dropdown',
+            dcc.Dropdown(
+                id='country-dropdown-growth',
                 options=[{'label': i, 'value': i} for i in df_top_countries['Entity'].unique()],
                 value=['World'],
                 multi=True,
@@ -52,7 +53,7 @@ layout = html.Div([
         ], style={'marginBottom': '20px'}),
         html.Div([
             html.Label("Select CO₂ emissions growth range (%):", style={'fontWeight': 'bold'}),
-            dmc.RangeSlider(
+            dcc.RangeSlider(
                 id='growth-range-slider',
                 min=-50,
                 max=50,
@@ -75,8 +76,8 @@ layout = html.Div([
         ], style={'marginBottom': '20px'}),
         html.Div([
             html.Label("Select Year:", style={'fontWeight': 'bold'}),
-            dmc.Slider(
-                id='year-slider',
+            dcc.Slider(
+                id='year-slider-growth',
                 min=df['Year'].min(),
                 max=df['Year'].max(),
                 value=df['Year'].min(),
@@ -89,12 +90,12 @@ layout = html.Div([
             )
         ], style={'marginBottom': '20px'}),
     ], style={'width': '50%', 'margin': 'auto'}),
-    dcc.Graph(id='plot', style={'height': '80vh', 'marginTop': '50px'}),
+    dcc.Graph(id='plot-growth', style={'height': '80vh', 'marginTop': '50px'}),
 ])
 
 # Define the callback for updating the dropdown based on plot type
 @callback(
-    Output('country-dropdown', 'enabled'),
+    Output('country-dropdown-growth', 'enabled'),
     Input('plot-type-dropdown', 'value')
 )
 def update_dropdown_disabled(plot_type):
@@ -103,7 +104,7 @@ def update_dropdown_disabled(plot_type):
 
 # Define the callback for updating the slider based on plot type
 @callback(
-    Output('year-slider', 'disabled'),
+    Output('year-slider-growth', 'disabled'),
     Input('plot-type-dropdown', 'value')
 )
 def update_slider_disabled(plot_type):
@@ -111,10 +112,10 @@ def update_slider_disabled(plot_type):
 
 # Define the callback for updating the plot
 @callback(
-    Output('plot', 'figure'),
+    Output('plot-growth', 'figure'),
     [Input('plot-type-dropdown', 'value'),
-     Input('country-dropdown', 'value'),
-     Input('year-slider', 'value'),
+     Input('country-dropdown-growth', 'value'),
+     Input('year-slider-growth', 'value'),
      Input('growth-range-slider', 'value')]  # Add the range slider as an input
 )
 
@@ -133,9 +134,9 @@ def update_plot(plot_type, selected_countries, selected_year, growth_range):
                                        ))
 
         fig.update_layout(
-            title_text="Annual CO₂ emissions growth (%)",
+            title_text="Annual percentage change in CO₂ emissions",
             xaxis_title='Year',
-            yaxis_title='Annual CO₂ emissions growth (%)',
+            yaxis_title='Annual percentage change in CO₂ emissions',
             hovermode='x unified',
            
         )
