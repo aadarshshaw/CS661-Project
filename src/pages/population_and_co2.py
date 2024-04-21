@@ -45,17 +45,21 @@ def create_population_graph():
                  size_max=40)
 
     # Update the title and adjust its location
-    fig.update_layout(title="Population v. CO2 Emission, 2020", 
+    fig.update_layout(title="Population vs CO2 Emission, 2020", 
                     title_x=0.5)
 
     # Show the figure
     return fig
 
 layout = html.Div([
+    html.H1("Population vs CO2 Emission, 2020"),
+    html.P('Lets see how the total CO2 emission of a country correlates to its population'),
     dcc.Graph(
         id='population-co2-graph',
         figure = create_population_graph(),
-    )
+    ),
+    html.P('In the above bubble chart,direct correlation between the population and the CO2 emission of the countries can be clearly observed: as population increases, CO2 emission increases as well.'),
+    html.P('Another dimension that can be easily observed from the bubble chart is the size of the bubbles, which represents the land area of every country. Moreover, color functionality allows us to see another dimension in the same chart: the density of every country. Again, not to see the correlation, but just to observe the country density along with all other features in just one visual.')
 ])
 
 

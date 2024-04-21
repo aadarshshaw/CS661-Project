@@ -156,10 +156,10 @@ def update_plot(plot_type, selected_countries, selected_year, growth_range):
             color='Annual CO₂ emissions growth (%)',  # column with color values
             hover_name='Entity',  # column to add to hover information
             color_continuous_scale=px.colors.sequential.Plasma_r,  # Change color scale
-            range_color=(0, 20), 
+            range_color=(-50, 50), 
             labels={'Annual CO₂ emissions growth (%)'},  # replaces default colorbar title
         )
-
+        
         fig.update_layout(
             title_text='Annual CO₂ emissions growth (%) in'  + ' ' + str(selected_year),
             geo=dict(

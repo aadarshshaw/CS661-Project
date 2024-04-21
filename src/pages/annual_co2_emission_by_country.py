@@ -121,7 +121,10 @@ def update_graph(selected_countries):
     fig.update_layout(
         title="CO2 Emissions Over Time",
         xaxis_title="Year",
-        yaxis_title="CO2 Emissions (in tons)"
+        yaxis_title="CO2 Emissions (in tonnes)",
+        width=985,  # Set the width of the figure
+        height=485,  # Set the height of the figure
+    
     )
 
     return fig
@@ -162,7 +165,7 @@ def update_choropleth(selected_countries=None):
 
     
     # Map chart background color
-    fig.update_geos(bgcolor='#F0F2F3', showcountries=True, showcoastlines=True, showland=True, landcolor="lightgray")
+    fig.update_geos(bgcolor='#F0F2F3', showcountries=False, showcoastlines=True, showland=True, landcolor="lightgray")
 
     # Add zoom control
     fig.update_layout(
@@ -194,7 +197,7 @@ country_names = [country.name for country in pycountry.countries]
 # Filter the DataFrame to only include rows where 'Entity' is a valid country name
 df = df_flat[df_flat['Entity'].isin(country_names)]
 # Assuming 'df' is your DataFrame containing the data
-# Filter the data for the years 2010 to 2022
+# Filter the data for the years 2000 to 2022
 filtered_data = df[(df['Year'] >= 2000) & (df['Year'] <= 2022)]
 
 # Calculate total emissions for each country
@@ -220,10 +223,10 @@ fig = px.bar(top_20_df,
 
 # Add text before the graph
 # Add text before the graph
-layout.children.append(html.P(children='Now, let\'s delve into the analysis of Total CO₂ Emissions between the years 2010 and 2022, focusing on the Top 20 Countries.'))
+layout.children.append(html.P(children='Now, let\'s delve into the analysis of Total CO₂ Emissions between the years 2000 and 2022, focusing on the Top 20 Countries.'))
 fig.update_layout(uniformtext_minsize=15,
                   xaxis_tickangle=-45,
-                  title='Total CO₂ Emission Between Years 2010 and 2022 - Top 20 Countries',
+                  title='Total CO₂ Emission Between Years 2000 and 2022 - Top 20 Countries',
                   title_x=0.5,
                   font=dict(  # Change the text color here
                       color="blue"
