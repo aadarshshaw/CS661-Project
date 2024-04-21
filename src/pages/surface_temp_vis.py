@@ -354,6 +354,9 @@ layout = html.Div(
                     ],
                     grow=True,
                 ),
+                dmc.Container(
+                    dmc.Space(h="80px"),
+                ),
             ]
         ),
     ]
