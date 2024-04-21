@@ -188,7 +188,6 @@ layout.children.append(html.Div([
     html.P('North America, dominated by the USA, is the second largest regional emitter at one-fourth of global emissions and it’s followed closely by Europe. Here we have grouped the countries in the European Union since they typically negotiate and set targets as a collective body. You can see the data for individual EU countries in the interactive maps that follow.'),
     html.P('Africa and South America are both fairly small emitters: accounting for 3-4% of global emissions each. Both have emissions similar in size to international aviation and shipping combined.')
 ]))
-import pycountry
 # Get a list of all country names
 country_names = [country.name for country in pycountry.countries]
 
@@ -227,7 +226,7 @@ fig.update_layout(uniformtext_minsize=15,
                   title='Total CO₂ Emission Between Years 2010 and 2022 - Top 20 Countries',
                   title_x=0.5,
                   font=dict(  # Change the text color here
-                      color="white"
+                      color="blue"
                   ))
 
 # Make background transparent
@@ -247,7 +246,7 @@ layout.children.append(html.P(children='Now observe the CO2 emission of differen
 df_path_region = (
     Path(__file__).parents[2]
     / "Datasets"
-    / "annual_co2_emissions_by_region"
+    / "annual_co2_emissions_by_country"
     / "annual-co-emissions-by-region.csv"
 )
 
