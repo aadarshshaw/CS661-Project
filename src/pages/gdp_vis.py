@@ -54,6 +54,12 @@ def create_emm_gdp_graph(emm_gdp):
         )
     )
 
+    fig.update_geos(
+        showframe=False,
+        showcoastlines=False,
+        projection_type="equirectangular",
+    )
+
     fig.update_layout(
         title="Correlation between CO2 emissions and GDP",
     )
@@ -72,6 +78,12 @@ def create_gdp_temp_graph(temp_gdp):
             zmin=-1,
             zmax=1,
         )
+    )
+
+    fig.update_geos(
+        showframe=False,
+        showcoastlines=False,
+        projection_type="equirectangular",
     )
 
     fig.update_layout(
@@ -107,16 +119,27 @@ def create_select_continent():
 layout = html.Div(
     [
         dmc.Text("GDP Visualisation", align="center", style={"fontSize": 30}),
+        dmc.Container(
+            create_select_continent(),
+            size="lg",
+            pt=20,
+            style={
+                "position": "fixed",
+                "z-index": "100",
+                "bottom": "0",
+                "width": "100%",
+                "background-color": "white",
+                "margin-left": "-10px",
+                "padding-bottom": "10px",
+            },
+        ),
         dmc.Grid(
             children=[
-                dmc.Col(
-                    create_select_continent(),
-                    span=12,
-                ),
                 dmc.Col(
                     dcc.Graph(
                         id="emm-gdp-graph",
                         figure=create_emm_gdp_graph(emm_gdp),
+                        style={"height": "60vh"},
                     ),
                     span=12,
                 ),
@@ -149,6 +172,7 @@ layout = html.Div(
                     dcc.Graph(
                         id="gdp-temp-graph",
                         figure=create_gdp_temp_graph(temp_gdp),
+                        style={"height": "60vh"},
                     ),
                     span=12,
                 ),
@@ -176,6 +200,9 @@ layout = html.Div(
                     ),
                     span=4,
                     id="average-temp-tile",
+                ),
+                dmc.Container(
+                    dmc.Space(h="80px"),
                 ),
             ],
         ),

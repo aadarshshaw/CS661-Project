@@ -138,27 +138,27 @@ def create_side_nav_content(nav_data):
             create_main_nav_link("material-symbols:home", "Home", "/"),
             create_main_nav_link(
                 "material-symbols:globe",
-                "Surface Temparature Vis",
+                "Surface Temparature",
                 "/surface_temp_vis",
             ),
             create_main_nav_link(
-                "material-symbols:eco",
-                "GDP Visualisation",
+                "material-symbols:account-balance",
+                "GDP",
                 "/gdp_vis",
             ),
             create_main_nav_link(
                 "material-symbols:cloud",
-                "CO2 Emissions Visualisation",
+                "CO2 Emissions",
                 "/co2_vis",
             ),
             create_main_nav_link(
                 "material-symbols:globe",
-                "Annual CO2 emission ",
+                "Annual CO2 Emmision ",
                 "/annual_co2_emission",
             ),
-            create_main_nav_link(      
+            create_main_nav_link(
                 "material-symbols:cloud",
-                "Annaul share of co2",
+                "Annual Share of CO2",
                 "/annual_share_of_co2",
             ),
         ],
