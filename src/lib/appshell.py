@@ -170,6 +170,8 @@ def create_side_nav_content(nav_data):
                 "material-symbols:cloud",
                 "Population and CO2",
                 "/population_and_co2",
+                "CO2 Emissions by Source",
+                "/co2_vis_source",
             ),
         ],
     )
