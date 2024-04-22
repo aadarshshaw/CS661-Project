@@ -7,6 +7,8 @@ import dash_mantine_components as dmc
 from assets.constants import months
 from pathlib import Path
 
+from util.content import create_Text
+
 register_page(
     __name__,
     "/co2_vis",
@@ -245,6 +247,24 @@ It's essential to note that these figures are based on production-based emission
                         )
                     ],
                     span=12,
+                ),
+                create_Text(
+                    "Insights that can be drawn from CO2 emission trend (Regionwise) Chart:"
+                ),
+                create_Text(
+                    "Temporal patterns: Graph reveals emissions patterns over 100+ years."
+                ),
+                create_Text(
+                    "Historical Context: Offers historical backdrop to emissions evolution."
+                ),
+                create_Text(
+                    "Comparative Analysis: Enables comparison between regions' emission trajectories."
+                ),
+                create_Text(
+                    "Policy Relevance: Informs climate policies and intervention strategies."
+                ),
+                create_Text(
+                    "Environmental Footprint: Highlights region's contribution to global emissions."
                 ),
                 dmc.Col(
                     dcc.Graph(

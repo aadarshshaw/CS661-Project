@@ -254,37 +254,27 @@ def create_country_temp_plot(year, selected_countries):
     return fig
 
 
-def create_Text(text):
-    return dmc.Container(
-        [
-            dmc.Space(h=10),
-            dmc.Text(text, size="sm", align="justify"),
-            dmc.Space(h=10),
-        ]
-    )
-
-
 layout = html.Div(
     [
         dmc.Text(
             "Surface Temperature Visualization", align="center", style={"fontSize": 30}
         ),
         create_Text(
-            """Over the last couple of centuries (from 1750-2023), we observe a massive rise in temperature for all countries, with higher spikes in more recent years, with the temperature (both globally and across a multitutde of countries) increasing at an almost exponential pace, which is rather alarming. While there are some natural causes partially responsible for this phenomenon, the data collected suggests that human activities, particularly emissions of heat-trapping greenhouse gases are majorly responsible for this rise in temperature. 
+            """Global warming is the long-term warming of the planet’s overall temperature. Though this warming trend has been going on for a long time, its pace has significantly increased in the last hundred years due to the burning of fossil fuels. As the human population has increased, so has the volume of fossil fuels burned. Fossil fuels include coal, oil, and natural gas, and burning them causes what is known as the “greenhouse effect” in Earth’s atmosphere.
 """
         ),
         create_Text(
-            """Given the tremendous size and heat capacity of the global oceans, it takes a massive amount of added heat energy to raise Earth's average yearly surface temperature even a small amount. The roughly 2-degree Fahrenheit (1 degrees Celsius) increase in global average surface temperature that has occurred since the pre-industrial era (1850-1900) might seem small, but it means a significant increase in accumulated heat.
+            """The greenhouse effect is when the sun’s rays penetrate the atmosphere, but when that heat is reflected off the surface cannot escape back into space. Gases produced by the burning of fossil fuels prevent the heat from leaving the atmosphere. These greenhouse gasses are carbon dioxide, chlorofluorocarbons, water vapor, methane, and nitrous oxide. The excess heat in the atmosphere has caused the average global temperature to rise overtime, otherwise known as global warming.
 """
         ),
         create_Text(
-            """That extra heat is driving regional and seasonal temperature extremes, reducing snow cover and sea ice, intensifying heavy rainfall, and changing habitat ranges for plants and animals—expanding some and shrinking others.  As the map below shows, most land areas have warmed faster than most ocean areas, and the Arctic is warming faster than most other regions. """
-        ),
-        create_Text(
-            """The world map below visualizes the temperature across most countries from 1750-2023. For a majority of such countries, the last 10 years of temperature recorded have been the highest recorded for that country since 1750.
+            """Given the tremendous size and heat capacity of the global oceans, it takes a massive amount of added heat energy to raise Earth’s average yearly surface temperature even a small amount. The roughly 2-degree Fahrenheit (1 degrees Celsius) increase in global average surface temperature that has occurred since the pre-industrial era (1850-1900) might seem small, but it means a significant increase in accumulated heat.
 """
         ),
-        dmc.Space(h=20),
+        create_Text(
+            """That extra heat is driving regional and seasonal temperature extremes, reducing snow cover and sea ice, intensifying heavy rainfall, and changing habitat ranges for plants and animals—expanding some and shrinking others.
+"""
+        ),
         dmc.Container(
             create_slider(min_year, max_year),
             size="lg",
@@ -310,6 +300,15 @@ layout = html.Div(
                                 id="surface-temperature-plot",
                             ),
                             span=12,
+                        ),
+                        create_Text(
+                            """Over the last couple of centuries (from 1750-2023), we observe a massive rise in temperature for all countries, with higher spikes in more recent years, with the temperature (both globally and across a multitutde of countries) increasing at an almost exponential pace, which is rather alarming. While there are some natural causes partially responsible for this phenomenon, the data collected suggests that human activities, particularly emissions of heat-trapping greenhouse gases are majorly responsible for this rise in temperature.
+
+"""
+                        ),
+                        create_Text(
+                            """The world map above visualizes the temperature across most countries from 1750-2023. For a majority of such countries, the last 10 years of temperature recorded have been the highest recorded for that country since 1750.
+"""
                         ),
                         dmc.Col(
                             Tile(
@@ -342,31 +341,58 @@ layout = html.Div(
                 ),
                 dmc.Grid(
                     children=[
-                        create_Text(
-                            """Considering that the highest and lowest temperatures on Earth are likely more than 55°C apart, the concept of Global Average Land Temperature might seem futile. Temperatures vary from night to day and between seasonal extremes in the Northern and Southern Hemispheres. This means that some parts of Earth are quite cold while other parts are downright hot. However, the concept of a global average temperature is convenient for detecting and tracking changes in certain parameters (such as Amount of sunlight Earth absorbs - Amount it radiates to space as heat over time).
-"""
-                        ),
-                        create_Text(
-                            """The graph below shows the Global Average Land Temperature from 1750-Present. It demonstrates the steady rise in Global Average Land Temperature in recent years (1879-Present), which coincides with the on-set of the Industrial Revolution, and further adds to the theory that human activities are the primary reason behind this rise in temperature."""
-                        ),
                         dmc.Col(
                             dcc.Graph(
                                 figure=create_global_temp_plot(2020),
                                 id="global-temp-plot",
                             ),
                         ),
-                        dmc.Col(),
+                        create_Text(
+                            """Considering that the highest and lowest temperatures on Earth are likely more than 55°C apart, the concept of Global Average Land Temperature might seem futile. Temperatures vary from night to day and between seasonal extremes in the Northern and Southern Hemispheres. This means that some parts of Earth are quite cold while other parts are downright hot. However, the concept of a global average temperature is convenient for detecting and tracking changes in certain parameters (such as Amount of sunlight Earth absorbs - Amount it radiates to space as heat over time).
+"""
+                        ),
+                        create_Text(
+                            """The graph above shows the Global Average Land Temperature from 1750-Present. It demonstrates the steady rise in Global Average Land Temperature in recent years (1879-Present), which coincides with the on-set of the Industrial Revolution, and further adds to the theory that human activities are the primary reason behind this rise in temperature. 
+"""
+                        ),
                         dmc.Col(
                             dcc.Graph(
                                 figure=create_climate_spiral(2024),
                                 id="climate-spiral",
                             ),
                         ),
+                        create_Text(
+                            """The Temperature Spiral was first published on 9 May 2016 by British climate scientist Ed Hawkins to portray global average temperature anomaly (change) since 1850. It is said to be a "simple and effective demonstration of the progression of global warming", especially for the masses. NASA recreated the Climate Spiral in 2023 for the years 1880-2022. Both of these versions have gone viral and gained the attention of a majority of viewers, with Ed Hawkin's version being shown at the Summer Olympics in 2016. 
+"""
+                        ),
+                        create_Text(
+                            """Our version of the Temperature Spiral, is based on data from 1880-2023. The dimensions can be well represented by Polar coordinates. Temperature is along the r-axis and different values are indicated by concentric circles (-1 °C, 0 °C and 1 °C are shown in the plot), Months are along the θ axis (Jan-Dec are shown at regular intervals of θ = 2π/12) and Year along the z-axis (1880-2023).
+"""
+                        ),
                         dmc.Col(
                             dcc.Graph(
                                 figure=create_global_temp_anomaly_plot(2023),
                                 id="global-temp-anomaly-plot",
                             ),
+                        ),
+                        create_Text(
+                            """The graph above shows temperature anomalies globally since 1880. For a particular area, these values are not absolute temperatures, but changes from the norm for that area. This concept can extended to a "Global" one as well. The data reflects how much warmer or cooler the Earth was compared to a base period of 1951-1980. (The global mean surface air temperature for that period was 14°C (57°F), with an uncertainty of several tenths of a degree.)
+
+"""
+                        ),
+                        create_Text(
+                            """From the maps shown prior, we infer that global warming does not mean temperatures rise everywhere at every time by same rate. Temperatures might rise 5 degrees in one region and drop 2 degrees in another. For instance, exceptionally cold winters in one place might be balanced by extremely warm winters in another part of the world. Generally, warming is greater over land than over the oceans because water is slower to absorb and release heat (thermal inertia). Warming may also differ substantially within specific land masses and ocean basins.
+
+"""
+                        ),
+                        create_Text(
+                            """In the chart above, the years from 1750 to 1939 tend to be cooler, then level off by the 1950s. Decades within the base period (1951-1980) do not appear particularly warm or cold because they are the standard against which other years are measured.
+
+"""
+                        ),
+                        create_Text(
+                            """The leveling off of temperatures in the middle of the 20th century can be explained by natural variability and by the cooling effects of aerosols generated by factories, power plants, and motor vehicles in the years of rapid economic growth after World War II. Fossil fuel use also increased after the war (5 percent per year), boosting greenhouse gases. Cooling from aerosol pollution happened rapidly. In contrast, greenhouse gases accumulated slowly, but they remain in the atmosphere for a much longer time. According to former GISS director James Hansen, the strong warming trend of the past four decades likely reflects a shift from balanced aerosol and greenhouse gas effects on the atmosphere to a predominance of greenhouse gas effects after aerosols were curbed by pollution controls.
+"""
                         ),
                     ],
                 ),
@@ -382,6 +408,9 @@ layout = html.Div(
                                 id="country-temp-plot",
                             ),
                             span=12,
+                        ),
+                        create_Text(
+                            """The chart above demonstrates the country-by-country monthly Temperature data from 1750-2013. The dropdown menu placed above can be used to select multiple countries, and compare the progression of their monthly temperature for a particular year by visualizing them in the same plot. We observe a seasonal trend, with temperature being higher in majority of the Summer and Autumn months  (May-Sep), and being lower in the Winter and Spring months (Jan-Apr and Oct-Dec)."""
                         ),
                     ],
                     grow=True,
@@ -419,11 +448,6 @@ def update_surface_plot(value):
             str(round(np.nanmin(getMeanTemperature(value)), 2)) + "°C",
             df["Country"][np.argmin(df[value])],
         ),
-        # Tile(
-        #     "Global Avg Temp",
-        #     str(round(np.nanmean(getMeanTemperature(value)), 2)) + "°C",
-        #     "World",
-        # ),
         Tile(
             "Data Available for",
             str(np.sum(~df[value].isna())),
