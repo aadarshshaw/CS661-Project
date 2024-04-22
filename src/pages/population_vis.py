@@ -9,7 +9,7 @@ from pathlib import Path
 
 register_page(
     __name__,
-    "/popultion_vis",
+    "/population_vis",
     title="Population Growth Visualisation",
     description="Visualisation of Population throughout the World",
 )
