@@ -101,14 +101,14 @@ layout = html.Div(
                     span=12,
                 ),
                 html.P(
-                children="The majority of countries exhibit negative correlations between temperature and population growth. This suggests that, in these countries, as temperatures increase, population growth tends to decrease. This trend could be attributed to factors such as increased heat stress, reduced agricultural productivity, and limited resources in warmer climates.",
+                children="The majority of countries exhibit positive correlations between CO2 emissions and population growth. This suggests that as population grows, there tends to be an increase in CO2 emissions, likely due to higher energy consumption, industrial activities, and transportation demands associated with larger populations.",
                 style={"textAlign": "left"},
                 ),
                 html.P(
-                "Countries in certain regions, such as Central America and parts of Africa, demonstrate particularly strong negative correlations between temperature and population growth. This could indicate that these regions are more sensitive to temperature changes, possibly due to higher vulnerability to climate-related challenges like droughts, which can impact food security and economic stability, thereby influencing population growth."
+                "While positive correlations are widespread, the strength of the correlation varies across regions. Some regions, like Eastern Europe and parts of Asia, demonstrate stronger positive correlations between CO2 emissions and population growth, indicating potentially higher levels of industrialization and urbanization in these areas."
                 ),
                 html.P(
-                "While negative correlations are predominant, there are notable exceptions. Some countries, like Luxembourg and Sweden, show positive correlations between temperature and population growth"
+                "While the general trend is positive, there are exceptions. Some countries, like Afghanistan and parts of Africa, show negative correlations. This could be due to factors such as lower industrialization levels, reliance on renewable energy sources, or other socio-economic factors influencing CO2 emissions independently of population growth. Understanding the nuances of these exceptions can provide valuable insights into effective climate and population policies."
                 ),
                 dmc.Col(
                     dcc.Graph(
