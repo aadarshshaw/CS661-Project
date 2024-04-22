@@ -153,7 +153,12 @@ def update_graph(selected_countries):
     fig.update_layout(
         title="CO2 Emissions Over Time",
         xaxis_title="Year",
-        yaxis_title="CO2 Emissions (in tons)",
+
+        yaxis_title="CO2 Emissions (in tonnes)",
+        width=985,  # Set the width of the figure
+        height=485,  # Set the height of the figure
+    
+
     )
 
     return fig
@@ -197,13 +202,9 @@ def update_choropleth(selected_countries=None):
     )
 
     # Map chart background color
-    fig.update_geos(
-        bgcolor="#F0F2F3",
-        showcountries=True,
-        showcoastlines=True,
-        showland=True,
-        landcolor="lightgray",
-    )
+
+    fig.update_geos(bgcolor='#F0F2F3', showcountries=False, showcoastlines=True, showland=True, landcolor="lightgray")
+
 
     # Add zoom control
     fig.update_layout(
@@ -222,25 +223,13 @@ def update_choropleth(selected_countries=None):
 
 import pycountry
 
-layout.children.append(
-    html.Div(
-        [
-            html.P(
-                "Asia is by far the largest emitter, accounting for around half of global emissions. As it is home to almost 60% of the world’s population this means that per capita emissions in Asia are slightly lower than the world average, however."
-            ),
-            html.P(
-                "China is, by a significant margin, Asia's and the world's largest emitter: it emits more than one-quarter of global emissions."
-            ),
-            html.P(
-                "North America, dominated by the USA, is the second largest regional emitter at one-fourth of global emissions and it’s followed closely by Europe. Here we have grouped the countries in the European Union since they typically negotiate and set targets as a collective body. You can see the data for individual EU countries in the interactive maps that follow."
-            ),
-            html.P(
-                "Africa and South America are both fairly small emitters: accounting for 3-4% of global emissions each. Both have emissions similar in size to international aviation and shipping combined."
-            ),
-        ]
-    )
-)
-import pycountry
+layout.children.append(html.Div([
+    html.P('Asia is by far the largest emitter, accounting for around half of global emissions. As it is home to almost 60% of the world’s population this means that per capita emissions in Asia are slightly lower than the world average, however.'),
+    html.P("China is, by a significant margin, Asia's and the world's largest emitter: it emits more than one-quarter of global emissions."),
+    html.P('North America, dominated by the USA, is the second largest regional emitter at one-fourth of global emissions and it’s followed closely by Europe. Here we have grouped the countries in the European Union since they typically negotiate and set targets as a collective body. You can see the data for individual EU countries in the interactive maps that follow.'),
+    html.P('Africa and South America are both fairly small emitters: accounting for 3-4% of global emissions each. Both have emissions similar in size to international aviation and shipping combined.')
+]))
+
 
 # Get a list of all country names
 country_names = [country.name for country in pycountry.countries]
@@ -248,8 +237,10 @@ country_names = [country.name for country in pycountry.countries]
 # Filter the DataFrame to only include rows where 'Entity' is a valid country name
 df = df_flat[df_flat["Entity"].isin(country_names)]
 # Assuming 'df' is your DataFrame containing the data
-# Filter the data for the years 2010 to 2022
-filtered_data = df[(df["Year"] >= 2000) & (df["Year"] <= 2022)]
+
+# Filter the data for the years 2000 to 2022
+filtered_data = df[(df['Year'] >= 2000) & (df['Year'] <= 2022)]
+
 
 # Calculate total emissions for each country
 total_emissions = filtered_data.groupby("Entity")["Annual CO₂ emissions"].sum()
@@ -281,17 +272,16 @@ fig = px.bar(
 
 # Add text before the graph
 # Add text before the graph
-layout.children.append(
-    html.P(
-        children="Now, let's delve into the analysis of Total CO₂ Emissions between the years 2010 and 2022, focusing on the Top 20 Countries."
-    )
-)
-fig.update_layout(
-    uniformtext_minsize=15,
-    xaxis_tickangle=-45,
-    title="Total CO₂ Emission Between Years 2010 and 2022 - Top 20 Countries",
-    title_x=0.5,
-)
+
+layout.children.append(html.P(children='Now, let\'s delve into the analysis of Total CO₂ Emissions between the years 2000 and 2022, focusing on the Top 20 Countries.'))
+fig.update_layout(uniformtext_minsize=15,
+                  xaxis_tickangle=-45,
+                  title='Total CO₂ Emission Between Years 2000 and 2022 - Top 20 Countries',
+                  title_x=0.5,
+                  font=dict(  # Change the text color here
+                      color="blue"
+                  ))
+
 
 # Make background transparent
 fig.update_layout(
@@ -373,46 +363,9 @@ def update_graph(selected_regions):
     return fig
 
 
-# #######
-layout.children.append(
-    html.P(
-        children="From the above graph, we can observe although Europe and United States are the regions having most of the CO2 emission in total, Asia's CO2 emission has skyrocketed in the last 2 decades."
-    )
-)
-# # Group the data frame by Entity and sum the CO2 emission
-# total_r = df_dash_region.groupby(['Entity'])["Annual CO₂ emissions by region"].sum()
 
-# # Create a data frame from the resulting series
-# df_total_r = pd.DataFrame(total_r)
+layout.children.append(html.P(children='From the above graph, we can observe although Europe and United States are the regions having most of the CO2 emission in total, Asia\'s CO2 emission has skyrocketed in the last 2 decades.'))
 
-# # Sort the dataframe
-# df_total_r = df_total_r.sort_values('Annual CO₂ emissions by region', ascending = False)
 
-# # Reset the index to convert Entity into a column
-# df_total_r.reset_index(level=0, inplace=True)
 
-# # Plot the bar chart
-# fig = px.bar(df_total_r,
-#               x = 'Entity',
-#               y = 'Annual CO₂ emissions by region',
-#               color='Annual CO₂ emissions by region',
-#               hover_name = 'Entity',
-#               hover_data = ['Annual CO₂ emissions by region'],
-#               color_continuous_scale = 'Peach',
-#               labels={'Entity':'Country','Annual CO₂ emissions by region':'Total CO₂ Emission'},
-#               height=500)
 
-# # Adjust text label size & angle and the title
-# fig.update_layout(uniformtext_minsize = 15,
-#                   xaxis_tickangle = -45,
-#                   title = 'Total CO₂ Emission Between Years 1750 and 2022 - Countries',
-#                   title_x = 0.5)
-
-# # Make background transparent
-# fig.update_layout({'plot_bgcolor': 'rgba(0, 0, 0, 0)',
-#                    'paper_bgcolor': 'rgba(0, 0, 0, 0)'})
-
-# # Show color scale axis
-# fig.update(layout_coloraxis_showscale = True)
-# # Add the graph to the layout
-# layout.children.append(dcc.Graph(id='bar-graph', figure=fig, style={'height': '600px', 'width': '1000px'}))

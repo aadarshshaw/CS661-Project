@@ -158,8 +158,18 @@ def create_side_nav_content(nav_data):
             ),
             create_main_nav_link(
                 "material-symbols:cloud",
-                "Annual Share of CO2",
+                "CO2 emissions share",
                 "/annual_share_of_co2",
+            ),
+            create_main_nav_link(
+                "material-symbols:cloud",
+                "CO2 Emissions growth",
+                "/co2_growth_annually",
+            ),
+            create_main_nav_link(
+                "material-symbols:cloud",
+                "Population and CO2",
+                "/population_and_co2",
             ),
         ],
     )
