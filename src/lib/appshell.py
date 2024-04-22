@@ -180,6 +180,14 @@ def create_side_nav_content(nav_data):
                 "material-symbols:cloud",
                 "Population Visualisation",
                 "/population_vis",
+                "material-symbols:factory",
+                "Sources of CO2 Emission",
+                "/sources_co2_emission",
+            ),
+            create_main_nav_link(
+                "material-symbols:graph",
+                "CO2 vs Temperature",
+                "/co2_temp",
             ),
         ],
     )
