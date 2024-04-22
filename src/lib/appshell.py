@@ -171,6 +171,11 @@ def create_side_nav_content(nav_data):
                 "Population and CO2",
                 "/population_and_co2",
             ),
+            create_main_nav_link(
+                "material-symbols:globe",
+                "Population Growth",
+                "/population_vis",
+            ),
         ],
     )
 
