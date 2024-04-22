@@ -6,6 +6,7 @@ import dash_mantine_components as dmc
 from assets.constants import months
 from util.climate_spiral import create_climate_spiral
 from pathlib import Path
+from util.content import create_Text
 
 register_page(
     __name__,
@@ -253,11 +254,37 @@ def create_country_temp_plot(year, selected_countries):
     return fig
 
 
+def create_Text(text):
+    return dmc.Container(
+        [
+            dmc.Space(h=10),
+            dmc.Text(text, size="sm", align="justify"),
+            dmc.Space(h=10),
+        ]
+    )
+
+
 layout = html.Div(
     [
         dmc.Text(
             "Surface Temperature Visualization", align="center", style={"fontSize": 30}
         ),
+        create_Text(
+            """Over the last couple of centuries (from 1750-2023), we observe a massive rise in temperature for all countries, with higher spikes in more recent years, with the temperature (both globally and across a multitutde of countries) increasing at an almost exponential pace, which is rather alarming. While there are some natural causes partially responsible for this phenomenon, the data collected suggests that human activities, particularly emissions of heat-trapping greenhouse gases are majorly responsible for this rise in temperature. 
+"""
+        ),
+        create_Text(
+            """Given the tremendous size and heat capacity of the global oceans, it takes a massive amount of added heat energy to raise Earth's average yearly surface temperature even a small amount. The roughly 2-degree Fahrenheit (1 degrees Celsius) increase in global average surface temperature that has occurred since the pre-industrial era (1850-1900) might seem small, but it means a significant increase in accumulated heat.
+"""
+        ),
+        create_Text(
+            """That extra heat is driving regional and seasonal temperature extremes, reducing snow cover and sea ice, intensifying heavy rainfall, and changing habitat ranges for plants and animals—expanding some and shrinking others.  As the map below shows, most land areas have warmed faster than most ocean areas, and the Arctic is warming faster than most other regions. """
+        ),
+        create_Text(
+            """The world map below visualizes the temperature across most countries from 1750-2023. For a majority of such countries, the last 10 years of temperature recorded have been the highest recorded for that country since 1750.
+"""
+        ),
+        dmc.Space(h=20),
         dmc.Container(
             create_slider(min_year, max_year),
             size="lg",
@@ -315,12 +342,20 @@ layout = html.Div(
                 ),
                 dmc.Grid(
                     children=[
+                        create_Text(
+                            """Considering that the highest and lowest temperatures on Earth are likely more than 55°C apart, the concept of Global Average Land Temperature might seem futile. Temperatures vary from night to day and between seasonal extremes in the Northern and Southern Hemispheres. This means that some parts of Earth are quite cold while other parts are downright hot. However, the concept of a global average temperature is convenient for detecting and tracking changes in certain parameters (such as Amount of sunlight Earth absorbs - Amount it radiates to space as heat over time).
+"""
+                        ),
+                        create_Text(
+                            """The graph below shows the Global Average Land Temperature from 1750-Present. It demonstrates the steady rise in Global Average Land Temperature in recent years (1879-Present), which coincides with the on-set of the Industrial Revolution, and further adds to the theory that human activities are the primary reason behind this rise in temperature."""
+                        ),
                         dmc.Col(
                             dcc.Graph(
                                 figure=create_global_temp_plot(2020),
                                 id="global-temp-plot",
                             ),
                         ),
+                        dmc.Col(),
                         dmc.Col(
                             dcc.Graph(
                                 figure=create_climate_spiral(2024),
