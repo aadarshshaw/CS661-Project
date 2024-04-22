@@ -118,14 +118,15 @@ layout = html.Div(
                     span=12,
                 ),
                  html.P(
-                children="The majority of countries show positive correlations between temperature and population growth. This suggests that, in these countries, as temperatures rise, population growth tends to increase. This could be due to factors like improved living conditions in warmer climates or better adaptation to temperature changes.",
+                children="The majority of countries exhibit negative correlations between temperature and population growth. This suggests that, in these countries, as temperatures increase, population growth tends to decrease. This trend could be attributed to factors such as increased heat stress, reduced agricultural productivity, and limited resources in warmer climates.",
                 style={"textAlign": "left"},
                 ),
                 html.P(
-                "Some regions, such as Eastern Europe and parts of Asia, exhibit particularly strong positive correlations between temperature and population growth. This may indicate specific regional factors influencing population dynamics, such as economic development, social policies, or environmental conditions."
+                "Countries in certain regions, such as Central America and parts of Africa, demonstrate particularly strong negative correlations between temperature and population growth. This could indicate that these regions are more sensitive to temperature changes, possibly due to higher vulnerability to climate-related challenges like droughts, which can impact food security and economic stability, thereby influencing population growth."
                 ),
                 html.P(
-                "While positive correlations are predominant, there are exceptions. Some countries show negative or weak correlations, indicating diverse factors at play in different contexts. Understanding the reasons behind these exceptions can provide valuable insights into the complex relationship between temperature and population dynamics."
+                " While negative correlations are predominant, there are notable exceptions. Some countries, like Luxembourg and Sweden, show positive correlations between temperature and population growth. This could be due to various factors such as robust economies, social policies, or geographic advantages that mitigate the adverse effects of temperature on population growth. Understanding the unique circumstances of these outliers can provide valuable insights into the complex relationship between temperature and population dynamics
+."
                 )
                 
             ],
