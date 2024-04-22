@@ -4,6 +4,7 @@ import plotly.graph_objects as go
 from dash import dcc, html, register_page, Input, Output, callback
 import dash_mantine_components as dmc
 from assets.constants import months
+from util.climate_spiral import create_climate_spiral
 from pathlib import Path
 
 register_page(
@@ -310,16 +311,6 @@ layout = html.Div(
                             span=4,
                             id="min-temp",
                         ),
-                        # dmc.Col(
-                        #     Tile(
-                        #         "Global Avg Temp",
-                        #         str(round(np.nanmean(getMeanTemperature(2023)), 2))
-                        #         + "°C",
-                        #         "World",
-                        #     ),
-                        #     span=3,
-                        #     id="global-temp",
-                        # ),
                     ],
                 ),
                 dmc.Grid(
@@ -328,6 +319,12 @@ layout = html.Div(
                             dcc.Graph(
                                 figure=create_global_temp_plot(2020),
                                 id="global-temp-plot",
+                            ),
+                        ),
+                        dmc.Col(
+                            dcc.Graph(
+                                figure=create_climate_spiral(2024),
+                                id="climate-spiral",
                             ),
                         ),
                         dmc.Col(
@@ -368,8 +365,8 @@ layout = html.Div(
         Output("surface-temperature-plot", "figure"),
         Output("max-temp", "children"),
         Output("min-temp", "children"),
-        # Output("global-temp", "children"),
         Output("data-available", "children"),
+        Output("climate-spiral", "figure"),
     ],
     Input("year-slider", "value"),
     prevent_initial_call=True,
@@ -397,6 +394,7 @@ def update_surface_plot(value):
             str(np.sum(~df[value].isna())),
             "Countries",
         ),
+        create_climate_spiral(value),
     )
 
 
