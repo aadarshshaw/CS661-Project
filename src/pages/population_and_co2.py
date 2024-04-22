@@ -19,6 +19,7 @@ register_page(
 
 population = pd.read_csv('Datasets/population_and_co2/population_and_co2.csv')
 
+all_gases = pd.read_csv('Datasets/population_and_co2/all_greenhouse_gases.csv')
 
 
 
@@ -51,6 +52,32 @@ def create_population_graph():
     # Show the figure
     return fig
 
+def create_greenhouse_gases_graph():
+    # Create traces for each gas
+    traces = []
+    colors = ['rgba(255, 0, 0, 0.8)', 'rgba(0, 255, 0, 0.8)', 'rgba(0, 0, 255, 0.8)']
+    for gas, color in zip(['total_co2', 'methane', 'nitrous_oxide'], colors):
+        trace = go.Bar(
+            x=all_gases['year'],
+            y=all_gases[gas],
+            name=gas,
+            marker=dict(color=color)
+        )
+        traces.append(trace)
+
+    # Create layout
+    layout = go.Layout(
+        title='Annual Gas Emissions',
+        xaxis=dict(title='Year'),
+        yaxis=dict(title='Emissions (million tone)'),  # Replace with appropriate units
+        barmode='group'
+    )
+
+    # Create figure
+    fig = go.Figure(data=traces, layout=layout)
+
+    return fig
+
 layout = html.Div([
     html.H1("Population vs CO2 Emission, 2020"),
     html.P('Lets see how the total CO2 emission of a country correlates to its population'),
@@ -59,7 +86,13 @@ layout = html.Div([
         figure = create_population_graph(),
     ),
     html.P('In the above bubble chart,direct correlation between the population and the CO2 emission of the countries can be clearly observed: as population increases, CO2 emission increases as well.'),
-    html.P('Another dimension that can be easily observed from the bubble chart is the size of the bubbles, which represents the land area of every country. Moreover, color functionality allows us to see another dimension in the same chart: the density of every country. Again, not to see the correlation, but just to observe the country density along with all other features in just one visual.')
+    html.P('Another dimension that can be easily observed from the bubble chart is the size of the bubbles, which represents the land area of every country. Moreover, color functionality allows us to see another dimension in the same chart: the density of every country. Again, not to see the correlation, but just to observe the country density along with all other features in just one visual.'),
+
+    html.H1("Annual Gas Emissions from 1990"),
+    dcc.Graph(
+        id='greenhouse-gases-graph',
+        figure=create_greenhouse_gases_graph()
+    )
 ])
 
 
