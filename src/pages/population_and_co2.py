@@ -55,7 +55,7 @@ def create_population_graph():
 def create_greenhouse_gases_graph():
     # Create traces for each gas
     traces = []
-    colors = ['rgba(255, 0, 0, 0.8)', 'rgba(0, 255, 0, 0.8)', 'rgba(0, 0, 255, 0.8)']
+    colors = ['rgba(0, 0, 255)', 'rgba(0, 255, 255)', 'rgba(255, 0, 0)']
     for gas, color in zip(['total_co2', 'methane', 'nitrous_oxide'], colors):
         trace = go.Bar(
             x=all_gases['year'],
@@ -69,7 +69,7 @@ def create_greenhouse_gases_graph():
     layout = go.Layout(
         title='Annual Gas Emissions',
         xaxis=dict(title='Year'),
-        yaxis=dict(title='Emissions (million tone)'),  # Replace with appropriate units
+        yaxis=dict(title='Emissions (million tonnes)'),  # Replace with appropriate units
         barmode='group'
     )
 
@@ -79,6 +79,13 @@ def create_greenhouse_gases_graph():
     return fig
 
 layout = html.Div([
+    html.H1("Climate Change Indicators: Global Greenhouse Gas Emissions since 1990"),
+    dcc.Graph(
+        id='greenhouse-gases-graph',
+        figure=create_greenhouse_gases_graph()
+    ),
+    html.P('This figure shows worldwide emissions of carbon dioxide, methane, nitrous oxide, and several fluorinated gases from 1990 to 2022.'),
+    html.P('From graph, it can be observed tht between 1990 and 2022, global emissions of all major greenhouse gases increased. Net emissions of carbon dioxide increased by 51 percent, which is particularly important because carbon dioxide accounts for about three-fourths of total global emissions. Methane emissions increased the least (17 percent) , while emissions of nitrous oxide increased by 24 percent. Emissions of fluorinated gases more than tripled. Hence, in our further analysis we have majorly focused on the CO2 emissions worldwide.'),
     html.H1("Population vs CO2 Emission, 2020"),
     html.P('Lets see how the total CO2 emission of a country correlates to its population'),
     dcc.Graph(
@@ -88,11 +95,7 @@ layout = html.Div([
     html.P('In the above bubble chart,direct correlation between the population and the CO2 emission of the countries can be clearly observed: as population increases, CO2 emission increases as well.'),
     html.P('Another dimension that can be easily observed from the bubble chart is the size of the bubbles, which represents the land area of every country. Moreover, color functionality allows us to see another dimension in the same chart: the density of every country. Again, not to see the correlation, but just to observe the country density along with all other features in just one visual.'),
 
-    html.H1("Annual Gas Emissions from 1990"),
-    dcc.Graph(
-        id='greenhouse-gases-graph',
-        figure=create_greenhouse_gases_graph()
-    )
+    
 ])
 
 
