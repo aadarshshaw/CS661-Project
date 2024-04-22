@@ -137,8 +137,43 @@ def create_side_nav_content(nav_data):
         children=[
             create_main_nav_link("material-symbols:home", "Home", "/"),
             create_main_nav_link(
+                "material-symbols:cloud",
+                "Climate Change Indicators",
+                "/population_and_co2",
+            ),
+            create_main_nav_link(
                 "material-symbols:globe",
-                "Surface Temparature",
+                "Annual CO2 Emissions",
+                "/annual_co2_emission",
+            ),
+            create_main_nav_link(
+                "material-symbols:factory",
+                "Sources of CO2 Emission",
+                "/sources_co2_emission",
+            ),
+            create_main_nav_link(
+                "material-symbols:cloud",
+                "Regionwise Effect of Sources",
+                "/co2_vis_source",
+            ),
+            create_main_nav_link(
+                "material-symbols:cloud",
+                "Share of CO2 Emissions",
+                "/annual_share_of_co2",
+            ),
+            create_main_nav_link(
+                "material-symbols:cloud",
+                "CO2 Emissions per Capita",
+                "/co2_vis",
+            ),
+            create_main_nav_link(
+                "material-symbols:cloud",
+                "Growth of CO2 Emissions",
+                "/co2_growth_annually",
+            ),
+            create_main_nav_link(
+                "material-symbols:globe",
+                "Surface Temperature",
                 "/surface_temp_vis",
             ),
             create_main_nav_link(
@@ -148,48 +183,8 @@ def create_side_nav_content(nav_data):
             ),
             create_main_nav_link(
                 "material-symbols:cloud",
-                "CO2 Emissions",
-                "/co2_vis",
-            ),
-            create_main_nav_link(
-                "material-symbols:globe",
-                "Annual CO2 Emmision ",
-                "/annual_co2_emission",
-            ),
-            create_main_nav_link(
-                "material-symbols:cloud",
-                "CO2 Emission by Source",
-                "/co2_vis_source",
-            ),
-            create_main_nav_link(
-                "material-symbols:cloud",
-                "CO2 emissions share",
-                "/annual_share_of_co2",
-            ),
-            create_main_nav_link(
-                "material-symbols:cloud",
-                "CO2 Emissions growth",
-                "/co2_growth_annually",
-            ),
-            create_main_nav_link(
-                "material-symbols:cloud",
-                "Population and CO2",
-                "/population_and_co2",
-            ),
-            create_main_nav_link(
-                "material-symbols:cloud",
                 "Population Visualisation",
                 "/population_vis",
-            ),
-            create_main_nav_link(
-                "material-symbols:factory",
-                "Sources of CO2 Emission",
-                "/sources_co2_emission",
-            ),
-            create_main_nav_link(
-                "material-symbols:graph",
-                "CO2 vs Temperature",
-                "/co2_temp",
             ),
         ],
     )

@@ -6,6 +6,8 @@ import dash_mantine_components as dmc
 from assets.constants import months
 from pathlib import Path
 
+from util.content import create_Text
+
 register_page(
     __name__,
     "/gdp_vis",
@@ -119,6 +121,14 @@ def create_select_continent():
 layout = html.Div(
     [
         dmc.Text("GDP Visualisation", align="center", style={"fontSize": 30}),
+        create_Text(
+            """Since the dawn of the industrial age, fossil fuels have been a key enabler of economic development, providing the fuel that generated most of the world’s electricity, powering automobiles, ships and aircraft, and fuelling industrial activity. As a result, economic growth has been closely tied to a rise in greenhouse gas emissions through most of modern economic history.
+"""
+        ),
+        create_Text(
+            """This relationship, however, is changing. With growing concern regarding climate change and global warming, there have beensteady improvements in the energy intensity of economic growth (meaning that less energy is required to produce an additional unit of global GDP). More recently, a dramatic rise in clean energy deployment, there has been a growing divergence between GDP growth and CO2 emissions in most economies around the world.
+"""
+        ),
         dmc.Container(
             create_select_continent(),
             size="lg",
@@ -168,6 +178,15 @@ layout = html.Div(
                     span=4,
                     id="average-gdp-tile",
                 ),
+                create_Text(
+                    """From the mapview given above, we observe the correlation between GDP and CO2 Emissions for countries across the past 2 decades (1999-2022). A positive (negative) correlation indicates that on an average, since 1999, an increase in GDP has been supplemented by an increase (decrease) in CO2 Emissions, and a decrease in CO2 Emissions has been accompanied by an a decrease (increase) in GDP. The higher the correlation value, the more ngeatively it is viewed, as it indicates the incapbility of decoupling GDP and CO2 Emissions. 
+"""
+                ),
+                create_Text(
+                    """In advanced economies, continued growth in GDP has been accompanied by a peak in CO2 emissions in 2007, followed by a decline. In many emerging and developing economies, the trajectories of CO2 emissions and GDP growth have also started to diverge.
+
+"""
+                ),
                 dmc.Col(
                     dcc.Graph(
                         id="gdp-temp-graph",
@@ -201,8 +220,12 @@ layout = html.Div(
                     span=4,
                     id="average-temp-tile",
                 ),
+                create_Text(
+                    """It has long been understood that economic outcomes are related to climate. This climate-economy relationship determines the scope and magnitude of market impacts from climate change over the next 100 years and beyond. Consequently, an understanding of the climate-economy relationship is central to projections of damages from anticipated climate change, and to policymaking that weighs the benefits and costs of climate change mitigation. The mapview given above demonstrates the correlation between GDP and Temperature for countries across the past 2 decades (1999-2022). A positive (negative) correlation indicates that on an average, since 1999, an increase in temperature has still been associated with an overall increase (decrease) in GDP and vice versa. A majority of higher GDP countries, sustained by non-agricultural production tend to have positive correlation values. On the other hand, a majority of lower GDP countries, sustained by agricultural production tend to have negative correlation values.
+"""
+                ),
                 dmc.Container(
-                    dmc.Space(h="80px"),
+                    dmc.Space(h=300),
                 ),
             ],
         ),

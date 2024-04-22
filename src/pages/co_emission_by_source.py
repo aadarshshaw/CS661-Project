@@ -4,6 +4,8 @@ from dash import dcc, html, register_page, Input, Output, callback
 import dash_mantine_components as dmc
 from pathlib import Path
 
+from util.content import create_Text
+
 register_page(
     __name__,
     "/co2_vis_source",
@@ -54,6 +56,10 @@ default_entities = ["World", "India", "United States", "China", "South America"]
 layout = html.Div(
     [
         dmc.Text("CO₂ Emissions by Source", style={"fontSize": 30}, align="center"),
+        create_Text(
+            """Carbon dioxide (CO2) emissions resulting from various sources, such as coal, oil, gas, flaring, cement, and other industrial activities are substantial contributors to the phenomenon of global climate change. The horizontal column graph represents the per capita CO2 emissions from various sources, such as coal, oil, gas, flaring, cement, and other industrial activities, across different countries or regions over the last century. This addition emphasizes the significance of understanding the specific sources of CO2 emissions, allowing for targeted mitigation strategies and a nuanced understanding of the factors driving emissions.
+"""
+        ),
         dmc.Space(h=20),
         dmc.Grid(
             [
@@ -80,6 +86,48 @@ layout = html.Div(
                         ],
                     ),
                     span=12,
+                ),
+            ]
+        ),
+        dmc.Space(h=50),
+        html.P("Insights from the graph:"),
+        html.Ul(
+            [
+                html.Li(
+                    [
+                        html.B("Comparative Analysis:"),
+                        " Easily compare CO2 emissions from different sources within each country or region.",
+                    ]
+                ),
+                html.Li(
+                    [
+                        html.B("Temporal Trends:"),
+                        " Visualize changes in emissions from various sources over time, highlighting evolving energy consumption patterns.",
+                    ]
+                ),
+                html.Li(
+                    [
+                        html.B("Regional Disparities:"),
+                        " Identify variations in emissions profiles across countries or regions, reflecting differences in energy infrastructure and economic development.",
+                    ]
+                ),
+                html.Li(
+                    [
+                        html.B("Impact of Policies and Technologies:"),
+                        " Observe how environmental policies and technological advancements influence emissions from different sources.",
+                    ]
+                ),
+                html.Li(
+                    [
+                        html.B("Targeted Mitigation Strategies:"),
+                        " Prioritize efforts to reduce emissions from the most significant sources, promoting sustainable energy alternatives.",
+                    ]
+                ),
+                html.Li(
+                    [
+                        html.B("International Comparisons:"),
+                        " Facilitate international cooperation by comparing emissions profiles and sharing knowledge on mitigation efforts.",
+                    ]
                 ),
             ]
         ),

@@ -248,23 +248,26 @@ It's essential to note that these figures are based on production-based emission
                     ],
                     span=12,
                 ),
-                create_Text(
-                    "Insights that can be drawn from CO2 emission trend (Regionwise) Chart:"
-                ),
-                create_Text(
-                    "Temporal patterns: Graph reveals emissions patterns over 100+ years."
-                ),
-                create_Text(
-                    "Historical Context: Offers historical backdrop to emissions evolution."
-                ),
-                create_Text(
-                    "Comparative Analysis: Enables comparison between regions' emission trajectories."
-                ),
-                create_Text(
-                    "Policy Relevance: Informs climate policies and intervention strategies."
-                ),
-                create_Text(
-                    "Environmental Footprint: Highlights region's contribution to global emissions."
+                html.P(
+                    [
+                        "Insights that can be drawn from CO2 emission trend (Regionwise) Chart:",
+                        html.Br(),
+                        html.B("Temporal patterns: "),
+                        "Graph reveals emissions patterns over 100+ years.",
+                        html.Br(),
+                        html.B("Historical Context: "),
+                        "Offers historical backdrop to emissions evolution.",
+                        html.Br(),
+                        html.B("Comparative Analysis: "),
+                        "Enables comparison between regions' emission trajectories.",
+                        html.Br(),
+                        html.B("Policy Relevance: "),
+                        "Policy Relevance: Informs climate policies and intervention strategies.",
+                        html.Br(),
+                        html.B("Environmental Footprint: "),
+                        "Highlights region's contribution to global emissions.",
+                        html.Br(),
+                    ]
                 ),
                 dmc.Col(
                     dcc.Graph(
@@ -279,6 +282,9 @@ It's essential to note that these figures are based on production-based emission
                         figure=Percentage_Share_of_CO2_per_country(),
                     ),
                     span=12,
+                ),
+                html.P(
+                    "We notice that till 1792, almost all the CO2 was emitted by the United Kingdom. However, around 1890, we noticed that the US overtook the UK in carbon emission share. This happened owing to massive large-scale industrialisation and the burning of fossil fuels in the US."
                 ),
                 dmc.Col(
                     dcc.Graph(

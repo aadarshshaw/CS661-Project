@@ -23,35 +23,46 @@ parsed_path = (
 # Read data from Excel file
 sources = pd.read_excel(parsed_path)
 
-params = ['Total CO2 Emission', 
-            'CO2 Emission from Fossil Fuels', 
-            'CO2 Emission from Land Use Change'
-        ]
+params = [
+    "Total CO2 Emission",
+    "CO2 Emission from Fossil Fuels",
+    "CO2 Emission from Land Use Change",
+]
+
 
 def create_source_graph(sources, country):
     fig = go.Figure()
     # print(sources[])
-    for param in ['Total CO2 Emission', 'CO2 Emission from Fossil Fuels', 'CO2 Emission from Land Use Change']:
-        fig.add_trace(go.Scatter(x=sources[sources['Entity'] == country]['Year'],
-            y=sources[sources['Entity'] == country][param],
-            mode='lines+markers',
-            name=param
+    for param in [
+        "Total CO2 Emission",
+        "CO2 Emission from Fossil Fuels",
+        "CO2 Emission from Land Use Change",
+    ]:
+        fig.add_trace(
+            go.Scatter(
+                x=sources[sources["Entity"] == country]["Year"],
+                y=sources[sources["Entity"] == country][param],
+                mode="lines+markers",
+                name=param,
+            )
         )
-    )
-    fig.update_layout(title='CO2 Emissions',
-        xaxis_title='Year',
-        yaxis_title='CO2 Emission (metric tons)',
-        showlegend=True
+    fig.update_layout(
+        title="CO2 Emissions",
+        xaxis_title="Year",
+        yaxis_title="CO2 Emission (metric tons)",
+        showlegend=True,
     )
     return fig
+
 
 def create_select_country(sources):
     return dmc.Select(
         id="country-select",
-        data = sources['Entity'].unique(),
+        data=sources["Entity"].unique(),
         placeholder="Select a Country",
         value="India",
     )
+
 
 layout = html.Div(
     [
@@ -60,15 +71,6 @@ layout = html.Div(
             create_select_country(sources),
             size="lg",
             pt=20,
-            style={
-                "position": "fixed",
-                "z-index": "100",
-                "bottom": "0",
-                "width": "100%",
-                "background-color": "white",
-                "margin-left": "-10px",
-                "padding-bottom": "10px",
-            },
         ),
         dmc.Grid(
             children=[
@@ -76,24 +78,29 @@ layout = html.Div(
                     dcc.Graph(
                         id="co2-emissions-graph",
                         figure=create_source_graph(sources, "India"),
-                        style={"height":"60vh"},
+                        style={"height": "60vh"},
                     ),
                     span=12,
-                )
+                ),
+                html.P(
+                    "Carbon dioxide (CO2) emissions stemming from fossil fuel combustion and land use change are significant contributors to global climate change. Fossil fuel combustion releases CO2 stored in coal, oil, and natural gas, significantly increasing atmospheric concentrations of this greenhouse gas. Additionally, land use change, such as deforestation and agricultural expansion, alters ecosystems, releasing stored carbon into the atmosphere. These emissions exacerbate the greenhouse effect, leading to rising global temperatures and associated impacts like sea level rise, extreme weather events, and disruptions to ecosystems."
+                ),
+                html.Br(),
+                html.P(
+                    "Plotting the total CO2 emissions, CO2 emissions from fossil fuels, and land use change over time for different countries can offer valuable insights into each nation's contributions to climate change. It can help identify trends, such as increasing emissions due to industrialization or decreasing emissions due to policy interventions or shifts towards renewable energy sources. By comparing the contributions of fossil fuels versus land use change, policymakers and researchers can prioritize mitigation strategies tailored to each country's specific challenges and opportunities, ultimately working towards global climate goals."
+                ),
             ]
-        )
+        ),
     ]
 )
 
-@callback(
-    Output('co2-emissions-graph', 'figure'),
-    Input('country-select', 'value'),
-)
 
+@callback(
+    Output("co2-emissions-graph", "figure"),
+    Input("country-select", "value"),
+)
 def update_plot(selected_country):
-    filtered_df = sources[sources['Entity'] == selected_country]
+    filtered_df = sources[sources["Entity"] == selected_country]
     updated_fig = go.Figure()
     updated_fig = create_source_graph(filtered_df, selected_country)
     return updated_fig
-
-
