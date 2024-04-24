@@ -10,9 +10,9 @@ import plotly.express as px
 
 register_page(
     __name__,
-    "/population_and_co2",
-    title="Population and CO2",
-    description="Visualisation of Population and CO2 data",
+    "/climate_change_indicators",
+    title="Climate Change Indicators",
+    description="Climate Change Indicators",
 )
 
 

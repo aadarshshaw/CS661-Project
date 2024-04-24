@@ -55,42 +55,58 @@ layout = html.Div(
             "We can explore how CO2 emissions change by country and over time in the following interactive map. By selecting any country from the dropdown list, you can see how its annual emissions have changed, and compare it with other countries."
         ),
         html.Div(
-            children="""Select Countries for comparative analysis""",
-            style={"textAlign": "center"},
+            html.H2(children="""Select Countries for comparative analysis""",
+            style={"textAlign": "center"}),
         ),
-        html.Div(
+        dmc.Space(h="xl"),
+        dmc.Grid(
             [
-                dcc.Dropdown(
-                    id="country-selector",
-                    options=[{"label": i, "value": i} for i in available_countries],
-                    value=[
-                        "United States",
-                        "India",
-                        "China",
-                        "Africa",
-                        "South America",
-                        "North America(excl. USA)",
+                dmc.Col(
+                    [
+                        dmc.Text("Select Plot Type:"),
                     ],
-                    multi=True,
-                    style={
-                        "width": "80%",
-                        "margin": "auto",
-                        "fontFamily": "Arial",  # Use a professional font
-                        "padding": "10px",  # Add padding
-                    },
-                )
-            ]
+                    span=3,
+                ),
+                dmc.Col(
+                    [
+                        dmc.RadioGroup(
+                            id="view-selector",
+                            children=dmc.Group([dmc.Radio("Map View","Map View"),
+                            dmc.Radio("Chart View","Chart View")]),
+                            value="Map View",  
+                        ),
+                    ],
+                    span=9,
+                ),
+                dmc.Col(
+                    [
+                        dmc.Text("Select Countries:"),
+                    ],
+                    span=3,
+                ),
+                dmc.Col(
+                    [
+                        dmc.MultiSelect(
+                            id="country-selector",
+                            data=[
+                                {"label": i, "value": i}
+                                for i in available_countries
+                            ],
+                            value=[
+                                "China",
+                                "United States",
+                                "India",
+                                "United Kingdom",
+                                "Canada",
+                                "European Union (27)",
+                            ],
+                        ),
+                    ],
+                    span=9,
+                ),
+            ],
         ),
-        dcc.RadioItems(
-            id="view-selector",
-            options=[{"label": i, "value": i} for i in ["Chart View", "Map View"]],
-            value="Map View",
-            style={
-                "textAlign": "center",
-                "fontFamily": "Arial",  # Use a professional font
-                "padding": "10px",  # Add padding
-            },
-        ),
+        dmc.Space(h="xl"),
         html.Div(
             id="view-container",
             style={
@@ -135,8 +151,8 @@ def update_graph(selected_countries):
     # Filter dataframe based on selected countries
     filtered_df = df_dash[df_dash["Entity"].isin(selected_countries)]
 
-    #     # Plot multiple time series
-    #     fig = go.Figure()
+    # Plot multiple time series
+    fig = go.Figure()
 
     for country in selected_countries:
         country_data = filtered_df[filtered_df["Entity"] == country]
@@ -158,7 +174,7 @@ def update_graph(selected_countries):
     )
 
 
-#     return fig
+    return fig
 
 
 # Define callback function to update choropleth map
