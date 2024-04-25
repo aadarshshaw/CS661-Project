@@ -20,9 +20,9 @@ population = pd.read_csv("Datasets/population_and_co2/population_and_co2.csv")
 
 all_gases = pd.read_csv("Datasets/population_and_co2/all_greenhouse_gases.csv")
 
+all_gases_countrywise = pd.read_csv("Datasets/population_and_co2/cleaned_dataset .csv")
 
-def update_population_graph():
-    return create_population_graph()
+
 
 
 population["Density (P/Km²)"] = population["Density (P/Km²)"].apply(
@@ -57,39 +57,38 @@ def create_population_graph():
     # Show the figure
     return fig
 
-
-def create_greenhouse_gases_graph():
-    # Create traces for each gas
-    traces = []
-    colors = ["rgba(0, 0, 255)", "rgba(0, 255, 255)", "rgba(255, 0, 0)"]
-    for gas, color in zip(["total_co2", "methane", "nitrous_oxide"], colors):
-        trace = go.Bar(
-            x=all_gases["year"], y=all_gases[gas], name=gas, marker=dict(color=color)
-        )
-        traces.append(trace)
-
-    # Create layout
-    layout = go.Layout(
-        title="Annual Gas Emissions",
-        xaxis=dict(title="Year"),
-        yaxis=dict(
-            title="Emissions (million tonnes)"
-        ),  # Replace with appropriate units
-        barmode="group",
-    )
-
-    # Create figure
-    fig = go.Figure(data=traces, layout=layout)
-
-    return fig
-
-
 layout = html.Div(
     [
         html.H1(
             "Climate Change Indicators: Global Greenhouse Gas Emissions since 1990"
         ),
-        dcc.Graph(id="greenhouse-gases-graph", figure=create_greenhouse_gases_graph()),
+        
+        dmc.Space(h="xl"),
+        dmc.Grid(
+            [
+                dmc.Col(
+                    [
+                        dmc.Text("Select Country:"),
+                    ],
+                    span=3,
+                ),
+                dmc.Col(
+                    [
+                        dmc.Select(
+                            id="country-dropdown",
+                            data=[
+                                {"label": i, "value": i}
+                                for i in all_gases_countrywise["country"].unique()
+                            ],
+                            value = "World",
+                        ),
+                    ],
+                    span=9,
+                ),
+            ],
+        ),
+        dmc.Space(h="xl"),
+        dcc.Graph(id="greenhouse-gases-graph"),
         html.P(
             "This figure shows worldwide emissions of carbon dioxide, methane, nitrous oxide, and several fluorinated gases from 1990 to 2022."
         ),
@@ -112,3 +111,40 @@ layout = html.Div(
         ),
     ]
 )
+
+@callback(
+    Output("greenhouse-gases-graph", "figure"),
+    Input("country-dropdown", "value"),
+)
+
+def update_greenhouse_gases_graph(selected_country):
+
+    country_data = all_gases_countrywise[
+            all_gases_countrywise["country"] == selected_country
+    ]
+    # Create traces for each gas
+    traces = []
+    colors = ["rgba(0, 0, 255)", "rgba(0, 255, 255)", "rgba(255, 0, 0)"]
+    for gas, color in zip(["total_co2", "methane", "nitrous_oxide"], colors):
+        trace = go.Bar(
+            x=country_data["year"], y=country_data[gas], name=gas, marker=dict(color=color)
+        )
+        traces.append(trace)
+
+    # Create layout
+    layout = go.Layout(
+        title="Annual Gas Emissions" + " in " + selected_country,
+        xaxis=dict(title="Year"),
+        yaxis=dict(
+            title="Emissions (million tonnes)"
+        ),  # Replace with appropriate units
+        barmode="group",
+    )
+
+    # Create figure
+    fig = go.Figure(data=traces, layout=layout)
+
+    return fig
+
+
+
