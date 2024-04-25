@@ -80,8 +80,6 @@ def world_CO2_map(hoverData):
         )
         mini_fig.add_trace(mini_graph)
         mini_fig.update_layout(
-            plot_bgcolor="rgba(0, 0, 0, 0)",
-            paper_bgcolor="rgba(0, 0, 0, 0)",
             title="CO₂ emissions (per capita) trend - " + country_name,
             xaxis_title="Year",
             yaxis_title="Per Capita CO₂ emissions ",
@@ -98,8 +96,6 @@ def world_CO2_map(hoverData):
         )
         mini_fig.add_trace(mini_graph)
         mini_fig.update_layout(
-            plot_bgcolor="rgba(0, 0, 0, 0)",
-            paper_bgcolor="rgba(0, 0, 0, 0)",
             title="CO₂ emissions (per capita) trend - " + country_name,
             xaxis_title="Year",
             yaxis_title="Per Capita CO₂ emissions ",
@@ -139,8 +135,6 @@ def Countries_emitting_most_CO2():
         xaxis_title="Year",
         yaxis_title="Annual CO2 emission",
         hovermode="x unified",
-        plot_bgcolor="rgba(0, 0, 0, 0)",
-        paper_bgcolor="rgba(0, 0, 0, 0)",
     )
 
     # Show the interactive plot
@@ -179,8 +173,6 @@ def Percentage_Share_of_CO2_per_country():
         xaxis_title="Year",
         yaxis_title="Share of CO2 Emissions (%)",
         hovermode="x unified",
-        plot_bgcolor="rgba(0, 0, 0, 0)",
-        paper_bgcolor="rgba(0, 0, 0, 0)",
     )
 
     # Show the interactive plot
@@ -215,7 +207,6 @@ def World_CO2_emission():
         xaxis_title="Year",
         yaxis_title="Annual CO2 emission",
         hovermode="x unified",
-        plot_bgcolor="rgba(0, 0, 0, 0)",
         paper_bgcolor="rgba(0, 0, 0, 0)",
     )
 

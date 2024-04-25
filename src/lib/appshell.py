@@ -142,7 +142,6 @@ def create_side_nav_content(nav_data):
                 "/climate_change_indicators",
             ),
             create_main_nav_link(
-                
                 "material-symbols:cloud",
                 "Annual CO2 Emissions",
                 "/annual_co2_emission",
@@ -158,7 +157,6 @@ def create_side_nav_content(nav_data):
                 "/co2_vis_source",
             ),
             create_main_nav_link(
-                
                 "material-symbols:pie-chart",
                 "Share of CO2 Emissions",
                 "/annual_share_of_co2",
@@ -187,6 +185,11 @@ def create_side_nav_content(nav_data):
                 "material-symbols:cloud",
                 "Population Visualisation",
                 "/population_vis",
+            ),
+            create_main_nav_link(
+                "material-symbols:edit-document",
+                "Conclusion",
+                "/conclusion",
             ),
         ],
     )
