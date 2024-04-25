@@ -137,12 +137,13 @@ def create_side_nav_content(nav_data):
         children=[
             create_main_nav_link("material-symbols:home", "Home", "/"),
             create_main_nav_link(
-                "material-symbols:cloud",
+                "material-symbols:bar-chart",
                 "Climate Change Indicators",
-                "/population_and_co2",
+                "/climate_change_indicators",
             ),
             create_main_nav_link(
-                "material-symbols:globe",
+                
+                "material-symbols:cloud",
                 "Annual CO2 Emissions",
                 "/annual_co2_emission",
             ),
@@ -157,7 +158,8 @@ def create_side_nav_content(nav_data):
                 "/co2_vis_source",
             ),
             create_main_nav_link(
-                "material-symbols:cloud",
+                
+                "material-symbols:pie-chart",
                 "Share of CO2 Emissions",
                 "/annual_share_of_co2",
             ),
@@ -167,7 +169,7 @@ def create_side_nav_content(nav_data):
                 "/co2_vis",
             ),
             create_main_nav_link(
-                "material-symbols:cloud",
+                "material-symbols:trending-up",
                 "Growth of CO2 Emissions",
                 "/co2_growth_annually",
             ),
@@ -278,7 +280,7 @@ clientside_callback(
             }
             return dash_clientside.no_update
         } else {
-            return { colorScheme: "light" }
+            return { colorScheme: "dark" }
         }
     }""",
     Output("theme-store", "data"),

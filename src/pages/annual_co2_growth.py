@@ -28,68 +28,105 @@ register_page(
 layout = html.Div([
     html.H1("Annual percentage change in CO₂ emissions"), 
     html.P('This interactive chart shows the year-on-year growth rate of CO2 emissions. A positive figure in a given year indicates that emissions were higher than the previous year. A negative figure indicates they were lower than the year before. For example, a change of 1.5% indicates that global emissions were 1.5% higher than the previous year (–1.5% would mean they were 1.5% lower).This measure allows us to see firstly where emissions are rising, and where they are falling; and secondly, the rate at which emissions are changing – whether the growth in emissions is slowing down or accelerating.'),
-    html.Div([
-        html.Div([
-            html.Label("Select Plot Type:", style={'fontWeight': 'bold'}),
-            dcc.Dropdown(
-                id='plot-type-dropdown',
-                options=[
-                    {'label': 'Map', 'value': 'choropleth'},
-                    {'label': 'Chart', 'value': 'scatter'}
-                ],
-                value='choropleth',  # Select Choropleth map initially
-                style={'width': '100%'}
-            ),
-        ], style={'marginBottom': '20px'}),
-        html.Div([
-            html.Label("Select Countries:", style={'fontWeight': 'bold'}),
-            dcc.Dropdown(
-                id='country-dropdown-growth',
-                options=[{'label': i, 'value': i} for i in df_top_countries['Entity'].unique()],
-                value=['World'],
-                multi=True,
-                style={'width': '100%'}
-            )
-        ], style={'marginBottom': '20px'}),
-        html.Div([
-            html.Label("Select CO₂ emissions growth range (%):", style={'fontWeight': 'bold'}),
-            dcc.RangeSlider(
-                id='growth-range-slider',
-                min=-50,
-                max=50,
-                value=[-50, 50],
-                step=1,
-                marks={
-                    -50: '-50%',
-                    -40: '-40%',
-                    -30: '-30%',
-                    -20: '-20%',
-                    -10: '-10%',
-                    0: '0%',
-                    10: '10%',
-                    20: '20%',
-                    30: '30%',
-                    40: '40%',
-                    50: '50%'
-                },
-            ),
-        ], style={'marginBottom': '20px'}),
-        html.Div([
-            html.Label("Select Year:", style={'fontWeight': 'bold'}),
-            dcc.Slider(
-                id='year-slider-growth',
-                min=df['Year'].min(),
-                max=df['Year'].max(),
-                value=df['Year'].min(),
-                marks={
-                    str(df['Year'].min()): str(df['Year'].min()),
-                    str(df['Year'].max()): str(df['Year'].max()),
-                    str(df['Year'].min()): str(df['Year'].min())  # current value
-                },
-                step=1
-            )
-        ], style={'marginBottom': '20px'}),
-    ], style={'width': '50%', 'margin': 'auto'}),
+    dmc.Space(h="xl"),
+    dmc.Grid(
+            [
+                dmc.Col(
+                    [
+                        dmc.Text("Select Plot Type:"),
+                    ],
+                    span=3,
+                ),
+                dmc.Col(
+                    [
+                        dmc.Select(
+                            id="plot-type-dropdown",
+                            data=[
+                                    {'label': 'Map', 'value': 'choropleth'},
+                                    {'label': 'Chart', 'value': 'scatter'}
+                            ],
+                            value="choropleth",  # Select Choropleth map initially
+                        ),
+                    ],
+                    span=9,
+                ),
+                dmc.Col(
+                    [
+                        dmc.Text("Select Countries:"),
+                    ],
+                    span=3,
+                ),
+                dmc.Col(
+                    [
+                        dmc.MultiSelect(
+                            id="country-dropdown-growth",
+                            data=[
+                                {'label': i, 'value': i} for i in df_top_countries['Entity'].unique()
+                            ],
+                            value=[
+                                "World",
+                            ],
+                        ),
+                    ],
+                    span=9,
+                ),
+                dmc.Col(
+                    [
+                        dmc.Text("Select Year:"),
+                    ],
+                    span=3,
+                ),
+                dmc.Col(
+                    [
+                        dcc.Slider(
+                            id='year-slider-growth',
+                            min=df['Year'].min(),
+                            max=df['Year'].max(),
+                            value=df['Year'].min(),
+                            marks={
+                                str(df['Year'].min()): str(df['Year'].min()),
+                                str(df['Year'].max()): str(df['Year'].max()),
+                                str(df['Year'].min()): str(df['Year'].min())  # current value
+                            },
+                            step=1
+                        )
+                    ],
+                    span=9,
+                ),
+                dmc.Col(
+                    [
+                        dmc.Text("Select CO₂ emissions growth range (%):"),
+                    ],
+                    span=3,
+                ),
+                dmc.Col(
+                    [
+                        dcc.RangeSlider(
+                            id='growth-range-slider',
+                            min=-50,
+                            max=50,
+                            value=[-50, 50],
+                            step=1,
+                            marks={
+                                -50: '-50%',
+                                -40: '-40%',
+                                -30: '-30%',
+                                -20: '-20%',
+                                -10: '-10%',
+                                0: '0%',
+                                10: '10%',
+                                20: '20%',
+                                30: '30%',
+                                40: '40%',
+                                50: '50%'
+                            },
+                        ),
+                    ],
+                    span=9,
+                ),
+            ],
+        ),
+
     dcc.Graph(id='plot-growth', style={'height': '80vh', 'marginTop': '50px'}),
 ])
 
