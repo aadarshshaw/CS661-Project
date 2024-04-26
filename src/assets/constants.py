@@ -2,7 +2,7 @@ introduction = """In light of escalating concerns surrounding climate change,
 it has become increasingly imperative to grasp the intricate patterns and global disparities in greenhouse gas emissions. This
 knowledge is paramount for policymakers, researchers, and
 the public alike. By comprehensively analyzing the cumulative emissions of significant greenhouse gases, including carbon dioxide, methane, and nitrous oxide, on a per-country basis
-from 2000 to 2020, our project seeks to create an interactive
+, our project seeks to create an interactive
 and dynamic visualization system. This tool aims to empower
 users in exploring and understanding each nation’s distinct contribution to the overall global emissions landscape, thereby facilitating informed decision-making and targeted initiatives to
 address climate change mitigation."""
