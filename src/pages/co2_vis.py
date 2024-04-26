@@ -207,7 +207,6 @@ def World_CO2_emission():
         xaxis_title="Year",
         yaxis_title="Annual CO2 emission",
         hovermode="x unified",
-        paper_bgcolor="rgba(0, 0, 0, 0)",
     )
 
     # Show the interactive plot
