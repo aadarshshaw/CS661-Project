@@ -120,14 +120,7 @@ layout = html.Div(
                 html.P(
                     " While negative correlations are predominant, there are notable exceptions. Some countries, like Luxembourg and Sweden, show positive correlations between temperature and population growth. This could be due to various factors such as robust economies, social policies, or geographic advantages that mitigate the adverse effects of temperature on population growth. Understanding the unique circumstances of these outliers can provide valuable insights into the complex relationship between temperature and population dynamics"
                 ),
-                html.H1("Conclusion"),
-                html.P(
-                    "It is pretty obvious that the amount of CO2 released to the atmosphere has been increased significantly in last 70 years, causing a variety of unwanted consequences all over the world: natural disasters such as fires and tornados and glacial meltdown."
-                ),
-                html.H3("It's never too late!"),
-                html.P(
-                    "Some say that we hit the point 'no-return' for global warming, yet we know that mother nature can heal anything. If we act together now, before losing all the forests, icebergs and infinite number of different species living on earth, we can still heal our world."
-                ),
+                
             ],
         ),
     ]

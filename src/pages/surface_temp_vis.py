@@ -108,8 +108,6 @@ def create_surface_plot(year):
 
     globe.update_layout(
         # title="Average land temperature in countries",
-        plot_bgcolor="rgba(0, 0, 0, 0)",
-        paper_bgcolor="rgba(0, 0, 0, 0)",
         geo=dict(
             showframe=False,
             showocean=True,
@@ -171,8 +169,6 @@ def create_global_temp_plot(year):
         title="Global Average Land Temperature",
         xaxis=dict(title="Year"),
         yaxis=dict(title="Temperature (°C)"),
-        plot_bgcolor="rgba(0, 0, 0, 0)",
-        paper_bgcolor="rgba(0, 0, 0, 0)",
     )
     return fig
 
@@ -197,8 +193,6 @@ def create_global_temp_anomaly_plot(year):
         title="Global Average Land Temperature Anomaly",
         xaxis=dict(title="Year"),
         yaxis=dict(title="Temperature Anomaly (°C)"),
-        plot_bgcolor="rgba(0, 0, 0, 0)",
-        paper_bgcolor="rgba(0, 0, 0, 0)",
     )
     return fig
 
@@ -216,8 +210,6 @@ def create_country_temp_plot(year, selected_countries):
                     tickangle=-45,
                 ),
                 yaxis=dict(title="Temperature (°C)"),
-                plot_bgcolor="rgba(0, 0, 0, 0)",
-                paper_bgcolor="rgba(0, 0, 0, 0)",
             ),
         )
     fig = go.Figure()
@@ -247,8 +239,6 @@ def create_country_temp_plot(year, selected_countries):
             tickangle=-45,
         ),
         yaxis=dict(title="Temperature (°C)"),
-        plot_bgcolor="rgba(0, 0, 0, 0)",
-        paper_bgcolor="rgba(0, 0, 0, 0)",
     )
 
     return fig

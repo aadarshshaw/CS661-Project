@@ -140,8 +140,6 @@ def create_climate_spiral(year):
         ),
         height=600,
         showlegend=False,
-        plot_bgcolor="rgba(0, 0, 0, 0)",
-        paper_bgcolor="rgba(0, 0, 0, 0)",
     )
 
     return fig
